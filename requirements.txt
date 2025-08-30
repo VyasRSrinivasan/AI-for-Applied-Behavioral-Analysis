@@ -1,0 +1,19 @@
+#Core 
+numpy
+pandas
+scikit-learn
+
+#Deep Learning
+torch 
+torchvision
+
+
+#NLP
+nltk
+spacy
+sentence-transformers
+transformers
+
+#Notebooks
+jupyter
+notebook
