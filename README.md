@@ -9,12 +9,10 @@ Therapy based on the science of learning and behavior.
 Positive reinforcement is one of the top strategies used in ABA.
 
 #### Antecedent, Behavior, Consequence (A-B-Cs)
-
+![alt text](./images/ABCforABADiagram.png)
 Antecedent: what happens BEFORE a behavior occurs
 Behavior: person's response or lack of response to the antecedent.
 Consequence: what happens AFTER a behavior occurs
-
-![alt text](./images/ABCforABADiagram.png)
 
 ## Objective
 To develop emotionally aware AI tools grounded in Applied Behavioral Analysis (ABA) that helps individuals who are neurodivergence to better understand, manage, and respond to social & emotional triggers with clarity and compassion.
