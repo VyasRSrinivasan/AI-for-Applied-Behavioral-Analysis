@@ -1,7 +1,20 @@
 # AI for Applied Behavioral Analysis (ABA)
 
 ## Overview
-Many people with autism and others have difficulties understanding subtle social cues and navigating complex social dynamics. Complex social dynamics are not black or white. There are a lot of nuances with social skills that are difficult for those on the autism spectrum to interpret
+Many people with autism and others have difficulties understanding subtle social cues and navigating complex social dynamics. Complex social dynamics are not black or white. There are a lot of nuances with social skills that are difficult for those on the autism spectrum to interpret.
+
+### Applied Behavioral Analysis (ABA) Overview:
+Therapy based on the science of learning and behavior.
+
+Positive reinforcement is one of the top strategies used in ABA.
+
+#### Antecedent, Behavior, Consequence (A-B-Cs)
+
+Antecedent: what happens BEFORE a behavior occurs
+Behavior: person's response or lack of response to the antecedent.
+Consequence: what happens AFTER a behavior occurs
+
+![alt text](./images/ABCforABADiagram.png)
 
 ## Objective
 To develop emotionally aware AI tools grounded in Applied Behavioral Analysis (ABA) that helps individuals who are neurodivergence to better understand, manage, and respond to social & emotional triggers with clarity and compassion.
@@ -28,4 +41,8 @@ Retrieval logic
 ## DISCLAIMER
 This tool is an experimental AI project inspired by Applied Behavior Analysis (ABA). It's designed for educational and self-reflective use ONLY. 
 It is NOT a substitute for professional therapy, diagnosis, or clinical advice. 
+
+## References
+
+Autism Speaks. “Applied Behavior Analysis (ABA).” Autism Speaks, 2021, www.autismspeaks.org/applied-behavior-analysis.
 
