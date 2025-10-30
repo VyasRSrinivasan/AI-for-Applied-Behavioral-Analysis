@@ -11,7 +11,9 @@ Positive reinforcement is one of the top strategies used in ABA.
 #### Antecedent, Behavior, Consequence (A-B-Cs)
 ![alt text](./images/ABCforABADiagram.png)
 Antecedent: what happens BEFORE a behavior occurs
+
 Behavior: person's response or lack of response to the antecedent.
+
 Consequence: what happens AFTER a behavior occurs
 
 ## Objective
