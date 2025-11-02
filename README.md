@@ -8,20 +8,17 @@ Positive reinforcement is one of the top strategies used in ABA.
 
 #### Antecedent, Behavior, Consequence (A-B-Cs)
 ![alt text](./images/ABCforABADiagram.png)
-##### Antecedent: 
-what happens BEFORE a behavior occurs
+_Antecedent_: what happens BEFORE a behavior occurs
 
-##### Behavior: 
-person's response or lack of response to the antecedent.
+_Behavior_: person's response or lack of response to the antecedent.
 
-##### Consequence: 
-what happens AFTER a behavior occurs
+_Consequence_: what happens AFTER a behavior occurs
 
 ## Objective
 Many people with autism and other neurodivergent traits have difficulty understanding subtle emotional or social cues, which results in anxiety, miscommunication, and stress.
 There are many AI chatbots and emotional assistants out there, but only very few incorporate ABA — mostly to diagnose people who might be on the autism spectrum.
 
-The goal is to develop emotionally aware AI tools grounded in Applied Behavioral Analysis (ABA) that helps individuals who are neurodivergence to better understand, manage, and respond to social & emotional triggers with clarity and compassion. This would be accomplished by identifying emotional triggers and providing supportive feedback using the ABA model.
+The goal is to develop emotionally aware AI tools grounded in *Applied Behavioral Analysis (ABA)* that helps individuals who are neurodivergence to better understand, manage, and respond to social & emotional triggers with clarity and compassion. This would be accomplished by identifying emotional triggers and providing supportive feedback using the ABA model.
 
 
 ## Users
