@@ -8,11 +8,11 @@ Positive reinforcement is one of the top strategies used in ABA.
 
 #### Antecedent, Behavior, Consequence (A-B-Cs)
 ![alt text](./images/ABCforABADiagram.png)
-_Antecedent_: what happens BEFORE a behavior occurs
+_Antecedent_: what happens *BEFORE* a behavior occurs
 
 _Behavior_: person's response or lack of response to the antecedent.
 
-_Consequence_: what happens AFTER a behavior occurs
+_Consequence_: what happens *AFTER* a behavior occurs
 
 ## Objective
 Many people with autism and other neurodivergent traits have difficulty understanding subtle emotional or social cues, which results in anxiety, miscommunication, and stress.
@@ -34,10 +34,16 @@ The goal is to develop emotionally aware AI tools grounded in *Applied Behaviora
 TBA
 
 ## Security & Compliance
-TBA
+- No user data collection
+- Synthetic or anonymized data
+- Ethical safeguards
 
-## Roadmap
-TBA
+## Methodology
+- Dataset Design & Preprocessing
+- Model Design
+- Evaluation
+- Ethical Design
+
 
 ## DISCLAIMER
 

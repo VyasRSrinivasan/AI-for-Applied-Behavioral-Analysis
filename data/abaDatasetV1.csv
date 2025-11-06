@@ -1,0 +1,26 @@
+ID,Antecedent,Behavior,Consequence,Emotion_Tag,Context
+1,My friend ignored me at lunch,I felt sad and didn’t talk to anyone,It’s okay to feel left out. Try checking in with your friend later — they may not have realized.,Sadness,Social
+2,The teacher raised their voice at me,I froze and couldn’t speak,It’s normal to feel nervous when someone uses a loud tone. Taking a deep breath can help ground you.,Anxiety,School
+3,I made a mistake on my homework,I felt embarrassed and threw it away,Mistakes happen to everyone. You can always fix it or ask for help.,Guilt,School
+4,Someone cut me in line,I shouted at them,Anger can be hard to control. Counting to five or stepping back can help before reacting.,Anger,Public
+5,My classmate complimented my artwork,I smiled and said thank you,That’s a great example of positive reinforcement — acknowledging kindness encourages more of it.,Happiness,School
+6,I forgot to bring my lunch,I got upset and blamed myself,Forgetting happens. Planning ahead next time can reduce stress.,Frustration,Home
+7,My sibling borrowed my stuff without asking,I yelled at them,Try calmly telling them how you feel. Setting boundaries can help both of you.,Anger,Home
+8,My friend didn’t reply to my message,I kept checking my phone anxiously,Waiting can be hard. Distract yourself with something relaxing until they respond.,Anxiety,Social
+9,The classroom got very noisy,I covered my ears and left the room,That’s a good self-regulation strategy. It’s okay to take a break when overwhelmed.,Overwhelm,School
+10,My parent told me to turn off my game,I got frustrated and slammed the controller,It’s okay to feel annoyed. Taking a pause before reacting helps you calm down faster.,Frustration,Home
+11,My group didn’t pick my idea for a project,I felt disappointed and stopped contributing,It’s okay to feel discouraged. Sharing your thoughts later shows teamwork and maturity.,Disappointment,School
+12,My teacher praised my effort in class,I felt proud,That’s positive reinforcement in action — feeling proud motivates you to keep improving.,Pride,School
+13,I didn’t get invited to my friend’s party,I felt hurt and stayed home sad,Feeling left out is painful. Remember, one event doesn’t define your worth or friendships.,Sadness,Social
+14,My classmate teased me about my clothes,I got quiet and avoided eye contact,It’s okay to walk away. You can talk to a teacher or friend who supports you.,Shame,School
+15,My parent reminded me of chores,I got defensive and said “I was going to!”,You’re not wrong to want space, but calmly explaining helps avoid arguments.,Irritation,Home
+16,I saw someone trip in the hallway,I helped them up,That’s a kind response! Helping others builds confidence and empathy.,Compassion,Public
+17,I got a bad grade on a test,I cried and didn’t want to study anymore,It’s okay to feel disappointed. Focus on what you can improve next time.,Sadness,School
+18,My sibling congratulated me on my project,I smiled and thanked them,Sharing gratitude strengthens relationships — great social awareness!,Happiness,Home
+19,My friend shared a secret with me,I told someone else,Everyone makes mistakes, but next time, keeping a secret shows trustworthiness.,Regret,Social
+20,I joined a new club,I felt nervous and didn’t talk much,Trying new things takes courage. You’ll feel more comfortable as you get familiar.,Anxiety,Social
+21,My parent said they were proud of me,I felt happy and motivated,That’s positive reinforcement — let yourself enjoy the moment.,Joy,Home
+22,My classmate asked me for help,I helped them even though I was busy,That’s generous! Helping others can strengthen teamwork skills.,Gratitude,School
+23,My internet stopped working during a game,I yelled and hit the table,Frustration is natural. Taking a break or stepping away helps release tension safely.,Anger,Home
+24,I missed the bus in the morning,I panicked and blamed myself,Being late happens. Prepare an extra 5 minutes earlier next time.,Anxiety,Daily life
+25,My teacher gave me extra homework,I felt annoyed but did it anyway,That’s great self-regulation — finishing tasks even when annoyed builds discipline.,Resilience,School
