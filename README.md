@@ -30,7 +30,7 @@ The goal is to develop emotionally aware AI tools grounded in *Applied Behaviora
 - Trigger-response dataset
 - Retrieval logic
 
-# System Architecture
+## System Architecture
 TBA
 
 ## Security & Compliance
