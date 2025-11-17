@@ -31,12 +31,14 @@ The goal is to develop emotionally aware AI tools grounded in *Applied Behaviora
 - Retrieval logic
 
 ## System Architecture
-
-1. **Input**
-2. **Text Vectorization**
-3. **Similarity Matching**
-4. **ABA Knowledge Base**
-5. **Response Generation**
+### Baseline Retriever
+| 1. **Input**
+| 2. **Text Vectorization**
+| 3. **Similarity Matching**
+| 4. **ABA Knowledge Base**
+| 5. **Response Generation**
+### RAG-based Retriever
+TBA
 
 ## Security & Compliance
 - No user data collection
