@@ -8,11 +8,11 @@ Positive reinforcement is one of the top strategies used in ABA.
 
 #### Antecedent, Behavior, Consequence (A-B-Cs)
 ![alt text](./images/ABCforABADiagram.png)
-_Antecedent_: what happens *BEFORE* a behavior occurs
+_Antecedent_(**A**): what happens *BEFORE* a behavior occurs
 
-_Behavior_: person's response or lack of response to the antecedent.
+_Behavior_(**B**): person's response or lack of response to the antecedent.
 
-_Consequence_: what happens *AFTER* a behavior occurs
+_Consequence_(**C**): what happens *AFTER* a behavior occurs
 
 ## Objective
 Many people with autism and other neurodivergent traits have difficulty understanding subtle emotional or social cues, which results in anxiety, miscommunication, and stress.
@@ -27,8 +27,16 @@ The goal is to develop emotionally aware AI tools grounded in *Applied Behaviora
 - Parents and caregivers who want to help the child on the spectrum with emotional self-regulation
 
 ## Features
-- Trigger-response dataset
-- Retrieval logic
+### Baseline Model (TF-IDF)
+- Utilizes TF-IDF to find the most similar A-B-C examples
+    
+### RAG Model with LLMs
+- Retrieves top-K similar examples using TF-IDF
+- Passes them into an LLM to generate a supportive response
+### Compliance Safeguards
+- Detects unsafe and harmful content
+    - uses a list of key phrases to check if content is unethical or unsafe
+### Agentic AI
 
 ## System Architecture
 ### Baseline Retriever
@@ -38,18 +46,24 @@ The goal is to develop emotionally aware AI tools grounded in *Applied Behaviora
 4. **ABA Knowledge Base**
 5. **Response Generation**
 ### RAG-based Retriever
-TBD
+1. **Input**
+2. **Compliance Filter**
+3. **TF-IDF Retrieval**
+4. **LLM Prompt Construction**
+5. **LLM Response Generation** 
 
 ## Security & Compliance
 - No user data collection
 - Synthetic or anonymized data
-- Ethical safeguards
+- Ethical safeguards to prevent harmful or unethical interpretation
 
 ## Methodology
-- Dataset Design & Preprocessing
-- Model Design
-- Evaluation
-- Ethical Design
+- **Dataset Design**
+- **Preprocessing**
+- **Baseline Model Design (_TF-IDF_)**
+- **RAG Model Design**
+- **Evaluation**
+- **Ethical Design**
 
 
 ## DISCLAIMER
@@ -60,5 +74,5 @@ It is NOT a substitute for professional therapy, diagnosis, or clinical advice.
 
 ## References & Acknowledgements
 
-Autism Speaks. “Applied Behavior Analysis (ABA).” Autism Speaks, 2021, www.autismspeaks.org/applied-behavior-analysis.
+- Autism Speaks. “Applied Behavior Analysis (ABA).” Autism Speaks, 2021, www.autismspeaks.org/applied-behavior-analysis.
 
