@@ -39,18 +39,48 @@ The goal is to develop emotionally aware AI tools grounded in *Applied Behaviora
 ### Agentic AI
 
 ## System Architecture
-### Baseline Retriever
+### TF-IDF Baseline Retriever (non-LLM)
+A simple retrieval system used to extract the most similar examples from the ABA dataset.
+
+Pipeline:
+
 1. **Input**
 2. **Text Vectorization**
 3. **Similarity Matching**
 4. **ABA Knowledge Base**
-5. **Response Generation**
-### RAG-based Retriever
+5. **Supportive Response Generation**
+
+Goal:
+Provides a standard deterministic baseline model for retrieval with NO involvement of LLMs.
+
+### RAG-based Retriever with LLMs
+
+
+Pipeline:
 1. **Input**
 2. **Compliance Filter**
 3. **TF-IDF Retrieval**
 4. **LLM Prompt Construction**
 5. **LLM Response Generation** 
+
+Reasons to use RAG:
+- Stay consistent and gentle
+- Prevent unsafe or overly clinical advice
+- Improve understanding of emotional situations 
+- Easy to maintain
+- Ability to grow with more examples
+
+
+### Agentic AI 
+A small agent that chooses how to respond before invoking any model.
+```
+def abaWithAgenticAI(userInput, k=3):
+```
+is a policy-based agent divided into **FOUR** routes:
+- Crisis 
+- Unethical 
+- Emotional Processing
+- Off-Limits
 
 ## Security & Compliance
 - No user data collection
