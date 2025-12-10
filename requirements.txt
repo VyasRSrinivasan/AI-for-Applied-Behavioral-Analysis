@@ -2,6 +2,7 @@
 numpy
 pandas
 scikit-learn
+streamlit
 
 #Deep Learning
 torch 
