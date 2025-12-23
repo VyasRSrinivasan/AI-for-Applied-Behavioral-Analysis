@@ -102,6 +102,13 @@ This tool is an experimental AI project inspired by Applied Behavior Analysis (A
 It is NOT a substitute for professional therapy, diagnosis, or clinical advice. 
 
 
+## Streamlit App
+
+Run the app: 
+
+[ABA Assist](https://aba-assist.streamlit.app/)
+
+
 ## References & Acknowledgements
 
 - Autism Speaks. “Applied Behavior Analysis (ABA).” Autism Speaks, 2021, www.autismspeaks.org/applied-behavior-analysis.
