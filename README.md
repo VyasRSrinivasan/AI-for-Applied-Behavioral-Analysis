@@ -82,6 +82,16 @@ is a policy-based agent divided into **FOUR** routes:
 - Emotional Processing
 - Off-Limits
 
+#### Comparison Table (Baseline vs. RAG vs. Agentic AI)
+
+| -------------     | Baseline (TF-IDF)         | RAG (TF-IDF w/ LLMs)      | Agentic AI                        |
+| -------------     | -------------             | -------------             | -------------                     |
+| Retrieval         | TF-IDF Cosine Similarity  |  TF-IDF Cosine Similarity | TF-IDF Cosine Similarity          |
+| Dataset Handling  | Extracts rows             |  Extracts rows            | Extracts rows                     |
+| Generation        | Templated                 |                           |                                   |
+| Safety/Compliance | None                      |                           |                                   |
+| Best Use          | Simple baseline           | More natural responses    | product reliability/guardrails    |
+
 ## Security & Compliance
 - No user data collection
 - Synthetic or anonymized data
@@ -96,17 +106,17 @@ is a policy-based agent divided into **FOUR** routes:
 - **Ethical Design**
 
 
-## DISCLAIMER
-
-This tool is an experimental AI project inspired by Applied Behavior Analysis (ABA). It's designed for educational and self-reflective use ONLY. 
-It is NOT a substitute for professional therapy, diagnosis, or clinical advice. 
-
-
 ## Streamlit App
 
 Run the app: 
 
 [ABA Assist](https://aba-assist.streamlit.app/)
+
+## DISCLAIMER
+
+This tool is an experimental AI project inspired by Applied Behavior Analysis (ABA). It's designed for educational and self-reflective use ONLY. 
+It is NOT a substitute for professional therapy, diagnosis, or clinical advice. 
+
 
 
 ## References & Acknowledgements
