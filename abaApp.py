@@ -104,6 +104,7 @@ def llmABARAGResponse(userInput, retrieval, model="llama3"):
     
         
 #Create RAG Prompt
+'''
 def createRAGPromptForABA(userInput, retrieval):
     blocks=[]
     for _, row in retrieval.iterrows():
@@ -139,27 +140,61 @@ def createRAGPromptForABA(userInput, retrieval):
     )
 
     return system_msg, user_msg    
-
+'''
 #Safety Checks
 
 
 SAFETY_CHECK_PROMPT = """
 You are a safety and ethics checker for an emotionally supportive assistant.
 
-Your job is to:
-1. Classify the user's input message as:
+Classify the user's input message as:
 - SAFE      : emotionally intense is acceptable, but NO encouragement of harm or abuse
-- UNSAFE    : encourages or normalizes manipulation, exploitation, abuse, or non-crisis harm
+- UNSAFE    : encourages or normalizes manipulation, exploitation, abuse, or harm to others
 - CRISIS    : suggests self-harm, suicidal thoughts, desire to tie, or severe harm to self or others
 
-2. If the message is UNSAFE or CRISIS, explain why it is harmful and unsafe and gently encourage healthier or safer next steps
-3. Never ever give instructions on how to harm, manipulate, or self-harm. ONLY discourage those behaviors and promote safety & empathy.
-Reply in this EXACT format:
+Rules:
+- If the message is UNSAFE or CRISIS, explain why it is harmful and unsafe and gently encourage healthier or safer next steps
+- Never ever give instructions on how to harm, manipulate, or self-harm. ONLY discourage those behaviors and promote safety & empathy.
 
+Reply ONLY in this EXACT format:
 CATEGORY: <SAFE or CRISIS or UNSAFE>
 EXPLANATION: <2-4 sentences explaning your reasoning in a supportive and non-judgemental tone.
 
+Examples:
+User: "I feel anxious and rejected today."
+CATEGORY: SAFE
+EXPLANATION: The user is expressing difficult emotions but is not asking to harm themselves or others.
+
+User: "How can I manipulate my friend to do what I want?"
+CATEGORY: UNSAFE
+EXPLANATION: This asks for manipulation, which can harm trust and relationships. Encourage respectful communication instead.
+
+User: "I want to kill myself."
+CATEGORY: CRISIS
+EXPLANATION: This suggests self-harm risk. Encourage immediate professional help and crisis resources.
 """
+def parseSafetyOutput(raw):
+    lines = raw.splitlines()
+    category = "UNSURE"
+    explanation = ""
+
+    for line in lines: 
+        if line.upper().startswith("CATEGORY:"):
+            if "SAFE" in line.upper():
+                category = "SAFE"
+            elif "CRISIS" in line.upper():
+                category = "CRISIS"
+            elif "UNSAFE" in line.upper():
+                category = "UNSAFE"
+        elif line.upper().startswith("EXPLANATION:"):
+            explanation = line[len("EXPLANATION:"):].strip()
+            
+    if not explanation:
+        explanation = "This message may involve complex or sensitive content, and it's important to handle it very carefully."
+    
+    return category, explanation
+
+
 def promptSafetyCheckforLLM(userInput, model):
     prompt = SAFETY_CHECK_PROMPT + "\n\nUser message:\n" + userInput.strip() + "\n\n"
     
@@ -181,25 +216,7 @@ def promptSafetyCheckforLLM(userInput, model):
         # Fallback if something goes wrong
         return "SAFE", "Safety check unavailable — treating message as safe."
     
-    lines = raw.splitlines()
-    category = "UNSURE"
-    explanation = ""
-    
-    for line in lines: 
-        if line.upper().startswith("CATEGORY:"):
-            if "SAFE" in line.upper():
-                category = "SAFE"
-            elif "CRISIS" in line.upper():
-                category = "CRISIS"
-            elif "UNSAFE" in line.upper():
-                category = "UNSAFE"
-        elif line.upper().startswith("EXPLANATION:"):
-            explanation = line[len("EXPLANATION:")].strip()
-            
-    if not explanation:
-        explanation = "This message may involve complex or sensitive content, and it's important to handle it very carefully."
-    
-    return category, explanation
+    return parseSafetyOutput(raw)
 
 
 # Create RAG Response
@@ -228,6 +245,14 @@ def createRAGResponse(userInput, k=3, minSimilarity=0.15, useLLM=True):
         
     return response, retrieval
 
+
+def getCrisisResources(country="US"):
+    if country == "US":
+        return (
+            "If you're in the U.S., you can call or text 988 (Suicide & Crisis Lifeline).\n"
+            "If you are in immediate danger, call 911.\n"
+            "If outside the U.S., contact your local emergency number or crisis line.")
+    return "If you are in danger, contact your local emergency number or crisis service."
 #Agentic AI
 
 def abaWithAgenticAI(userInput, k=3):
@@ -236,11 +261,11 @@ def abaWithAgenticAI(userInput, k=3):
     
     
     if category == "CRISIS":
+        resources = getCrisisResources(country="US")
         response = (safetyExplanation + ""
                     "Thank you for reaching out! Unfortunately, I am NOT able to provide crisis support," ,
                     "but you should seek professional help from someone who can. ",
-                    "Please consider reaching out to a trusted individual, a mental health professional, ",
-                    "or a crisis line in your area"
+                    resources
                    )
         return {
             "route": "crisis",
@@ -288,12 +313,15 @@ st.set_page_config(
     #page_icon="🧠",
     layout="centered"
 )
+col1, col2, col3 = st.columns([1, 2, 1])
+with col2:
+    st.image("./images/ABAProjectLogo.png", width=150)
 
 st.title("Agentic AI for Applied Behavior Analysis (ABA)")
+st.divider()
 st.markdown("A supportive emotional assistant inspired by Applied Behavioral Analysis (ABA).")
 st.markdown("---")
 
-st.divider()
 if "chat" not in st.session_state:
     st.session_state.chat = []
 if st.button("Clear Chat History"):

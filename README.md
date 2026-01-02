@@ -18,25 +18,36 @@ _Consequence_(**C**): what happens *AFTER* a behavior occurs
 Many people with autism and other neurodivergent traits have difficulty understanding subtle emotional or social cues, which results in anxiety, miscommunication, and stress.
 There are many AI chatbots and emotional assistants out there, but only very few incorporate ABA — mostly to diagnose people who might be on the autism spectrum.
 
-The goal is to develop emotionally aware AI tools grounded in *Applied Behavioral Analysis (ABA)* that helps individuals who are neurodivergence to better understand, manage, and respond to social & emotional triggers with clarity and compassion. This would be accomplished by identifying emotional triggers and providing supportive feedback using the ABA model.
+The goal is to develop emotionally aware AI tools grounded in *Applied Behavioral Analysis (ABA)* that helps individuals who are neurodivergent to better understand, manage, and respond to social & emotional triggers with clarity and compassion. This would be accomplished by identifying emotional triggers and providing supportive feedback using the ABA model.
 
+### Why this project?
+- Many people with autism have difficulty reading subtle social cues and emotionally loaded feedback, which can lead to rumination, miscommunication, and difficulty moving on.
+- Explores how an AI assistant can provide structured, non-clinical support** using an ABA-inspired A-B-C framing (Antecedent -> Behavior -> Consequence)
 
 ## Users
 - Individuals with Autism who are self-aware and want to improve
-- ABA educators and therapist looking into digital assistive tools
+- ABA educators and therapists looking into digital assistive tools
 - Parents and caregivers who want to help the child on the spectrum with emotional self-regulation
 
 ## Features
 ### Baseline Model (TF-IDF)
 - Utilizes TF-IDF to find the most similar A-B-C examples
+- Uses cosine similarity to retrieve the top-K most simlar examples
+- Produces a simple, deterministic response from the retrieved "Consequence" suggestions
     
 ### RAG Model with LLMs
-- Retrieves top-K similar examples using TF-IDF
-- Passes them into an LLM to generate a supportive response
-### Compliance Safeguards
-- Detects unsafe and harmful content
-    - uses a list of key phrases to check if content is unethical or unsafe
+- Retrieves top-K similar A-B-C examples using TF-IDF paired with cosine similarity
+- Constructs a grounded prompt using the retrieved examples (A, B, suggestion, emotion tag)
+- Passes them into a local LLM (Ollama & Llama 3) to generate a supportive response
+- Defaults to the templated response should similarity be too small or LLM is unavailable
+
 ### Agentic AI
+- Runs a safety classifier using LLMs to label output as **SAFE / UNSAFE / CRISIS**
+- Routing:
+    - **CRISIS**: returns crisis guidance and resources
+    - **UNSAFE**: gives an explanation as to why it's harmful and redirects the user to safer alternatives
+    - **SAFE**: proceeds with RAG
+    - **OFF-LIMITS**: tells the user to reframe around feelings & behavior triggers
 
 ## System Architecture
 ### TF-IDF Baseline Retriever (non-LLM)
@@ -84,7 +95,7 @@ is a policy-based agent divided into **FOUR** routes:
 
 #### Comparison Table (Baseline vs. RAG vs. Agentic AI)
 
-| -------------     | Baseline (TF-IDF)         | RAG (TF-IDF w/ LLMs)      | Agentic AI                        |
+|                   | Baseline (TF-IDF)         | RAG (TF-IDF w/ LLMs)      | Agentic AI                        |
 | -------------     | -------------             | -------------             | -------------                     |
 | Retrieval         | TF-IDF Cosine Similarity  |  TF-IDF Cosine Similarity | TF-IDF Cosine Similarity          |
 | Dataset Handling  | Extracts rows             |  Extracts rows            | Extracts rows                     |
@@ -92,7 +103,7 @@ is a policy-based agent divided into **FOUR** routes:
 | Safety/Compliance | None                      |                           |                                   |
 | Best Use          | Simple baseline           | More natural responses    | product reliability/guardrails    |
 
-## Security & Compliance
+## Security & Compliance Safeguards
 - No user data collection
 - Synthetic or anonymized data
 - Ethical safeguards to prevent harmful or unethical interpretation
