@@ -30,28 +30,10 @@ The goal is to develop emotionally aware AI tools grounded in *Applied Behaviora
 - Parents and caregivers who want to help the child on the spectrum with emotional self-regulation
 
 ## Features
-### Baseline Model (TF-IDF)
+### Baseline TF-IDF Retriever (no LLMs)
 - Utilizes TF-IDF to find the most similar A-B-C examples
 - Uses cosine similarity to retrieve the top-K most simlar examples
 - Produces a simple, deterministic response from the retrieved "Consequence" suggestions
-    
-### RAG Model with LLMs
-- Retrieves top-K similar A-B-C examples using TF-IDF paired with cosine similarity
-- Constructs a grounded prompt using the retrieved examples (A, B, suggestion, emotion tag)
-- Passes them into a local LLM (Ollama & Llama 3) to generate a supportive response
-- Defaults to the templated response should similarity be too small or LLM is unavailable
-
-### Agentic AI
-- Runs a safety classifier using LLMs to label output as **SAFE / UNSAFE / CRISIS**
-- Routing:
-    - **CRISIS**: returns crisis guidance and resources
-    - **UNSAFE**: gives an explanation as to why it's harmful and redirects the user to safer alternatives
-    - **SAFE**: proceeds with RAG
-    - **OFF-LIMITS**: tells the user to reframe around feelings & behavior triggers
-
-## System Architecture
-### TF-IDF Baseline Retriever (non-LLM)
-A simple retrieval system used to extract the most similar examples from the ABA dataset.
 
 Pipeline:
 
@@ -63,17 +45,12 @@ Pipeline:
 
 Goal:
 Provides a standard deterministic baseline model for retrieval with NO involvement of LLMs.
-
-### RAG-based Retriever with LLMs
-
-
-
-Pipeline:
-1. **Input**
-2. **Compliance Filter**
-3. **TF-IDF Retrieval**
-4. **LLM Prompt Construction**
-5. **LLM Response Generation** 
+    
+### RAG with LLMs
+- Retrieves top-K similar A-B-C examples using TF-IDF paired with cosine similarity
+- Constructs a grounded prompt using the retrieved examples (A, B, suggestion, emotion tag)
+- Passes them into a local LLM (Ollama & Llama 3) to generate a supportive response
+- Defaults to the templated response should similarity be too small or LLM is unavailable
 
 Reasons to use RAG:
 - Stay consistent and gentle
@@ -82,9 +59,14 @@ Reasons to use RAG:
 - Easy to maintain
 - Ability to grow with more examples
 
+### Agentic AI
+- Runs a safety classifier using LLMs to label output as **SAFE / UNSAFE / CRISIS**
+- Routing:
+    - **CRISIS**: returns crisis guidance and resources
+    - **UNSAFE**: gives an explanation as to why it's harmful and redirects the user to safer alternatives
+    - **SAFE**: proceeds with RAG
+    - **OFF-LIMITS**: tells the user to reframe around feelings & behavior triggers
 
-### Agentic AI 
-A small agent that chooses how to respond before invoking any model.
 ```
 def abaWithAgenticAI(userInput, k=3):
 ```
@@ -94,7 +76,6 @@ is a policy-based agent divided into **FOUR** routes:
 - Emotional Processing
 - Off-Limits
 
-![alt text](./images/ABASystemArchitectureRAG.png)
 
 #### Comparison Table (Baseline vs. RAG vs. Agentic AI)
 
@@ -102,9 +83,21 @@ is a policy-based agent divided into **FOUR** routes:
 | -------------     | -------------             | -------------             | -------------                     |
 | Retrieval         | TF-IDF Cosine Similarity  |  TF-IDF Cosine Similarity | TF-IDF Cosine Similarity          |
 | Dataset Handling  | Extracts rows             |  Extracts rows            | Extracts rows                     |
-| Generation        | Templated                 |                           |                                   |
-| Safety/Compliance | None                      |                           |                                   |
+| Generation        | Templated                 |  LLMs                     | LLMs                              |
+| Safety/Compliance | None                      | None                      | UNSAFE/SAFE/CRISIS Routing        |
 | Best Use          | Simple baseline           | More natural responses    | product reliability/guardrails    |
+
+## System Architecture
+
+### Baseline TF-IDF Retriever (no LLMs)
+![alt text](./images/ABAArchitectureDiagramTFIDF.png)
+
+### RAG with LLMs
+![alt text](./images/ABAArchitectureDiagramRAG.png)
+
+### Agentic AI
+![alt text](./images/ABAArchitectureDiagramAgenticAI.png)
+
 
 ## Security & Compliance Safeguards
 - No user data collection
