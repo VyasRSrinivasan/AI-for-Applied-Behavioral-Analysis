@@ -100,13 +100,13 @@ is a policy-based agent divided into **FOUR** routes:
 
 | Component                         | What It Does   | Why It's Necessary |
 | -------------                     | -------------  | -------------                                      |
-| Dataset (A-B-C)                   | Stores structured examples (Antecedent -> Behavior -> Consequence)  | Gives predictable grounding and reduces hallucination      |
-| TF-IDF Retriever                  | Find most similar examples  | Easy baseline retrieval      |
-| RAG Prompt Builder                | Inserts retrieved examples into structured prompt | Makes LLM response consistent     |
-| LLM (Llama via Ollama)            | Generates natural language response  | Improves empathy and fluency tailored to user prompt rather than it being templated      |
-| Safety Classifier (LLM Prompt)    | Labels input as SAFE/UNSAFE/CRISIS  | Prevents unsafe outputs by refusing to answer prompt     |
-| Agentic Router                    | Picks the correct route and tools based on safety label appropriate for user input | Makes the system agentic      |
-| Tools/APIs                        | Fetch crisis resources, log events, and so on  | Demonstrates real world  integration     |
+| **Dataset (A-B-C)**                   | Stores structured examples (Antecedent -> Behavior -> Consequence)  | Gives predictable grounding and reduces hallucination      |
+| **TF-IDF Retriever**                  | Find most similar examples  | Easy baseline retrieval      |
+| **RAG Prompt Builder**                | Inserts retrieved examples into structured prompt | Makes LLM response consistent     |
+| **LLM (Llama via Ollama)**            | Generates natural language response  | Improves empathy and fluency tailored to user prompt rather than it being templated      |
+| **Safety Classifier (LLM Prompt)**    | Labels input as SAFE/UNSAFE/CRISIS  | Prevents unsafe outputs by refusing to answer prompt     |
+| **Agentic Router**                    | Picks the correct route and tools based on safety label appropriate for user input | Makes the system agentic      |
+| **Tools/APIs**                        | Fetch crisis resources, log events, and so on  | Demonstrates real world  integration     |
 
 
 ## Security & Compliance Safeguards
