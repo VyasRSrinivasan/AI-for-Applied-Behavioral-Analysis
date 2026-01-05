@@ -67,6 +67,7 @@ Provides a standard deterministic baseline model for retrieval with NO involveme
 ### RAG-based Retriever with LLMs
 
 
+
 Pipeline:
 1. **Input**
 2. **Compliance Filter**
@@ -92,6 +93,8 @@ is a policy-based agent divided into **FOUR** routes:
 - Unethical 
 - Emotional Processing
 - Off-Limits
+
+![alt text](./images/ABASystemArchitectureRAG.png)
 
 #### Comparison Table (Baseline vs. RAG vs. Agentic AI)
 
