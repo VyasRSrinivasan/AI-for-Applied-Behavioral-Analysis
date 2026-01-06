@@ -67,15 +67,6 @@ Reasons to use RAG:
     - **SAFE**: proceeds with RAG
     - **OFF-LIMITS**: tells the user to reframe around feelings & behavior triggers
 
-```
-def abaWithAgenticAI(userInput, k=3):
-```
-is a policy-based agent divided into **FOUR** routes:
-- Crisis 
-- Unethical 
-- Emotional Processing
-- Off-Limits
-
 
 #### Comparison Table (Baseline vs. RAG vs. Agentic AI)
 
@@ -133,7 +124,7 @@ Run the app:
 
 This tool is an experimental AI project inspired by Applied Behavior Analysis (ABA). It's designed for educational and self-reflective use ONLY. 
 
-If you are someone else is in IMMEDIATE danger, please contact EMERGENCY SERVICES!
+If you or someone else is in IMMEDIATE danger, please contact EMERGENCY SERVICES!
 
 It is NOT a substitute for professional therapy, diagnosis, or clinical advice. 
 

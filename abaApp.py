@@ -6,8 +6,10 @@ import sklearn
 from sklearn.preprocessing import LabelEncoder
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+import time
 
 # Load Data
+'''
 inputFile = "./data/abaDatasetV1.csv"
 df = pd.read_csv(inputFile)
 print(df.shape)
@@ -17,7 +19,22 @@ texts = df["Antecedent"].fillna("") + " " + df["Behavior"].fillna("") + " " + df
 
 vectorizer = TfidfVectorizer()
 X = vectorizer.fit_transform(texts)
+'''
 
+@st.cache_data
+def load_data(path):
+    df = pd.read_csv(path)
+    texts = df["Antecedent"].fillna("") + " " + df["Behavior"].fillna("") + " " + df["Consequence"].fillna("")
+    return df, texts
+
+@st.cache_resource
+def build_vectorizer(texts):
+    vectorizer = TfidfVectorizer()
+    X = vectorizer.fit_transform(texts)
+    return vectorizer, X
+
+df, texts = load_data("./data/abaDatasetV1.csv")
+vectorizer, X = build_vectorizer(texts)
 
 
 #RetrieveTopK
@@ -256,9 +273,10 @@ def getCrisisResources(country="US"):
 #Agentic AI
 
 def abaWithAgenticAI(userInput, k=3):
+    t0 = time.time()
     text = userInput.strip()
     category, safetyExplanation = promptSafetyCheckforLLM(userInput, model="llama3")
-    
+    t1 = time.time()
     
     if category == "CRISIS":
         resources = getCrisisResources(country="US")
@@ -285,11 +303,12 @@ def abaWithAgenticAI(userInput, k=3):
             "User_Input": text,
             "Response": response,
             "Retrieved": df.iloc[[]].copy()
+
         }
     
     if category == "SAFE":
         response, retrieved = createRAGResponse(text, k=k, useLLM=True)
-        
+        t2 = time.time()
         return {
             "route": "aba_RAG",
             "User_Input": text,
