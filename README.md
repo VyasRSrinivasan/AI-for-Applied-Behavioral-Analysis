@@ -1,5 +1,12 @@
 # AI for Applied Behavioral Analysis (ABA)
 
+## DISCLAIMER
+
+This tool is an experimental AI project inspired by Applied Behavior Analysis (ABA). It's designed for educational and self-reflective use ONLY. 
+
+If you or someone else is in IMMEDIATE danger, please contact EMERGENCY SERVICES!
+
+It is NOT a substitute for professional therapy, diagnosis, or clinical advice. 
 
 ## Applied Behavioral Analysis (ABA) Fundamentals
 Therapy based on the science of learning and behavior.
@@ -60,7 +67,7 @@ Reasons to use RAG:
 - Ability to grow with more examples
 
 ### Agentic AI
-- Runs a safety classifier using LLMs to label output as **SAFE / UNSAFE / CRISIS**
+- Runs a safety classifier using LLMs to label output as **CRISIS / UNSAFE / SAFE / OFF-LIMITS**
 - Routing:
     - **CRISIS**: returns crisis guidance and resources
     - **UNSAFE**: gives an explanation as to why it's harmful and redirects the user to safer alternatives
@@ -120,13 +127,6 @@ Run the app:
 
 [ABA Assist](https://aba-assist.streamlit.app/)
 
-## DISCLAIMER
-
-This tool is an experimental AI project inspired by Applied Behavior Analysis (ABA). It's designed for educational and self-reflective use ONLY. 
-
-If you or someone else is in IMMEDIATE danger, please contact EMERGENCY SERVICES!
-
-It is NOT a substitute for professional therapy, diagnosis, or clinical advice. 
 
 
 
