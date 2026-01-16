@@ -15,6 +15,8 @@ Positive reinforcement is one of the top strategies used in ABA.
 
 #### Antecedent, Behavior, Consequence (A-B-Cs)
 ![alt text](./images/ABCforABADiagram.png)
+In ABA, there is an A-B-C framework:
+
 _Antecedent_(**A**): what happens *BEFORE* a behavior occurs
 
 _Behavior_(**B**): person's response or lack of response to the antecedent.
@@ -36,10 +38,22 @@ The goal is to develop emotionally aware AI tools grounded in *Applied Behaviora
 - ABA educators and therapists looking into digital assistive tools
 - Parents and caregivers who want to help the child on the spectrum with emotional self-regulation
 
+## Dataset
+A small synthetic ABA-inspired dataset generated using _ChatGPT_ with 100+ rows of:
+- **Antecedent (A)** -> **Behavior (B)** -> Supportive Suggestion (C)
+- **Emotion_Tag** for lightweight emotion categorization
+
+Usage:
+- Baseline: TF-IDF + cosine similarity retrieval and 
+- RAG: retrieved examples included in the structured prompt to ground the LLM response.
+
+Scope:
+- Data is synthetic and designed for educational & non-clinical use cases.
+
 ## Features
 ### Baseline TF-IDF Retriever (no LLMs)
 - Utilizes TF-IDF to find the most similar A-B-C examples
-- Uses cosine similarity to retrieve the top-K most simlar examples
+- Uses cosine similarity to retrieve the top-K most similar examples
 - Produces a simple, deterministic response from the retrieved "Consequence" suggestions
 
 Pipeline:
@@ -51,8 +65,17 @@ Pipeline:
 5. **Supportive Response Generation**
 
 Goal:
-Provides a standard deterministic baseline model for retrieval with NO involvement of LLMs.
+Provides a standard deterministic baseline model for retrieval with NO LLM involvement.
     
+TF-IDF Advantages:
+* Fast and simple
+* Interpretable 
+* Low cost
+
+TF-IDF Disadvantages:
+* Unable to recognize context
+* Weak on synonyms and different wordings
+
 ### RAG with LLMs
 - Retrieves top-K similar A-B-C examples using TF-IDF paired with cosine similarity
 - Constructs a grounded prompt using the retrieved examples (A, B, suggestion, emotion tag)
@@ -67,23 +90,23 @@ Reasons to use RAG:
 - Ability to grow with more examples
 
 ### Agentic AI
-- Runs a safety classifier using LLMs to label output as **CRISIS / UNSAFE / SAFE / OFF-LIMITS**
-- Routing:
+- Uses LLMs to label user input as **CRISIS / UNSAFE / SAFE / OFF-LIMITS**
+- A router selects one of the FOUR routes:
     - **CRISIS**: returns crisis guidance and resources
     - **UNSAFE**: gives an explanation as to why it's harmful and redirects the user to safer alternatives
     - **SAFE**: proceeds with RAG
-    - **OFF-LIMITS**: tells the user to reframe around feelings & behavior triggers
+    - **OFF-LIMITS**: requests the user to reframe around feelings & behavior triggers
 
 
 #### Comparison Table (Baseline vs. RAG vs. Agentic AI)
 
-|                   | Baseline (TF-IDF)         | RAG (TF-IDF w/ LLMs)      | Agentic AI                        |
-| -------------     | -------------             | -------------             | -------------                     |
-| Retrieval         | TF-IDF Cosine Similarity  |  TF-IDF Cosine Similarity | TF-IDF Cosine Similarity          |
-| Dataset Handling  | Extracts rows             |  Extracts rows            | Extracts rows                     |
-| Generation        | Templated                 |  LLMs                     | LLMs                              |
-| Safety/Compliance | None                      | None                      | UNSAFE/SAFE/CRISIS Routing        |
-| Best Use          | Simple baseline           | More natural responses    | product reliability/guardrails    |
+|                   | Baseline (TF-IDF with No LLM)         | RAG (TF-IDF w/ LLMs)      | Agentic AI                        |
+| -------------     | -------------                         | -------------             | -------------                     |
+| Retrieval         | TF-IDF Cosine Similarity              |  TF-IDF Cosine Similarity | TF-IDF Cosine Similarity          |
+| Dataset Handling  | Extracts rows                         |  Extracts rows            | Extracts rows                                      |
+| Generation        | Templated                             |  LLMs                     | LLMs                                               |
+| Safety/Compliance | None                                  | None                      | UNSAFE/SAFE/CRISIS classification & routing        |
+| Best Use          | Simple baseline                       | More natural responses    | product reliability/guardrails    |
 
 ## System Architecture
 
@@ -126,8 +149,6 @@ Reasons to use RAG:
 Run the app: 
 
 [ABA Assist](https://aba-assist.streamlit.app/)
-
-
 
 
 ## References & Acknowledgements

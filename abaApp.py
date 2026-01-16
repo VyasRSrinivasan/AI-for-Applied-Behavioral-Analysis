@@ -7,6 +7,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import time
+import json
 
 # Load Data
 '''
@@ -167,14 +168,15 @@ You are a safety and ethics checker for an emotionally supportive assistant.
 Classify the user's input message as:
 - SAFE      : emotionally intense is acceptable, but NO encouragement of harm or abuse
 - UNSAFE    : encourages or normalizes manipulation, exploitation, abuse, or harm to others
-- CRISIS    : suggests self-harm, suicidal thoughts, desire to tie, or severe harm to self or others
+- CRISIS    : suggests self-harm, suicidal thoughts, desire to die, or severe harm to self or others
+- OFF-LIMITS : unrelated to the goal of this tool.
 
 Rules:
 - If the message is UNSAFE or CRISIS, explain why it is harmful and unsafe and gently encourage healthier or safer next steps
 - Never ever give instructions on how to harm, manipulate, or self-harm. ONLY discourage those behaviors and promote safety & empathy.
 
 Reply ONLY in this EXACT format:
-CATEGORY: <SAFE or CRISIS or UNSAFE>
+CATEGORY: <SAFE or CRISIS or UNSAFE or OFF-LIMITS>
 EXPLANATION: <2-4 sentences explaning your reasoning in a supportive and non-judgemental tone.
 
 Examples:
@@ -263,6 +265,40 @@ def createRAGResponse(userInput, k=3, minSimilarity=0.15, useLLM=True):
     return response, retrieval
 
 
+TOOL_ROUTER_PROMPT = """
+You are a tool router for an ABA-style supportive assistant.
+
+You may select tools ONLY from this list:
+- getCrisisResources(country)
+- getGroundingExercise(kind)
+- getEmotion(emotion)
+- logInteraction(route, toolUsed, latencyMS)
+
+Rules:
+- Output ONLY valid JSON (no markdown, no extra text).
+- If the user is in CRISIS or UNSAFE, DO NOT call supportive tools except getCrisisResources.
+- If no tool is needed, set use_tools=false and tools=[].
+
+Return JSON schema:
+{
+  "useTools": boolean,
+  "tools": [{"name": string, "args": object}],
+  "why": string
+}
+
+Examples:
+
+User: "I feel anxious. Can you give me a quick breathing exercise?"
+{"useTools": true, "tools":[{"name":"getGroundingExercise","args":{"kind":"box_breathing"}}], "why":"User asked for a concrete calming exercise."}
+
+User: "What does 'rejected' mean emotionally?"
+{"useTools": true, "tools":[{"name":"getEmotion","args":{"emotion":"rejected"}}], "why":"User asked for a definition."}
+
+User: "I want to kill myself."
+{"useTools": true, "tools":[{"name":"getCrisisResources","args":{"country":"US"}}], "why":"Crisis content—provide crisis resources only."}
+"""
+
+
 def getCrisisResources(country="US"):
     if country == "US":
         return (
@@ -270,6 +306,74 @@ def getCrisisResources(country="US"):
             "If you are in immediate danger, call 911.\n"
             "If outside the U.S., contact your local emergency number or crisis line.")
     return "If you are in danger, contact your local emergency number or crisis service."
+
+def getGroundingExercise(typeOfExercise):
+    if typeOfExercise == "boxBreathing":
+        return (
+            "Try box breathing:\n"
+            "1) Inhale 4 seconds\n"
+            "2) Hold 4 seconds\n"
+            "3) Exhale 4 seconds\n"
+            "4) Hold 4 seconds\n"
+            "Repeat 4 times\n"
+
+        )
+    if typeOfExercise == "5-4-3-2-1":
+        return (
+            "Try 5-4-3-2-1 grounding:\n"
+            "5 things you SEE"
+            "4 things you FEEL"
+            "3 things you HEAR"
+            "2 things you SMELL"
+            "1 thing you TASTE"
+        )
+
+    return "Try slow breathing:\n Inhale 4 \n Exhale 6\n Repeat for 2 minutes"
+
+def ollamaGenerate(prompt, model="llama3", timeout=60):
+    resp = requests.post(
+        OLLAMA_URL,
+        json={"model": model, "prompt": prompt, "stream": False},
+        timeout=timeout
+    )
+    resp.raise_for_status()
+    return resp.json().get("response", "").strip()
+
+def selectToolsWithLLM(userInput, safetyCategory, model="llama3"):
+    prompt = (
+        TOOL_ROUTER_PROMPT
+        +"\n\n"
+        +"Safety Category: " + safetyCategory + "\n"
+        +"User: " + userInput + "\n"
+    )
+    raw = ollamaGenerate(prompt, model=model)
+
+    try:
+        plan = json.loads(raw)
+    except json.JSONDecodeError:
+        return {"use_tools": False, "tools": [], "why": "Router JSON parse failed."}
+
+
+
+def getEmotion(emotion):
+    emotion = (emotion or "").strip().lower()
+    lookup = {
+        "rejected": "Rejected often means you expected acceptance or connection, but perceived distance or disapproval instead.",
+        "anxious": "Anxious often means your mind is predicting threat or uncertainty, and your body is preparing to respond.",
+        "unseen": "Unseen often means your effort or feelings weren’t acknowledged in the way you hoped."
+    }
+    return lookup.get(emotion, f"'{emotion}' can be complex—tell me the situation and what it brought up for you.")
+
+def logInteraction(route, toolUsed=None, latencyMS=None):
+    return {"ok": True, "route": route, "toolUsed": toolUsed, "latencyMS": latencyMS}
+
+TOOL_REGISTRY = {
+    "getGroundingExercise": getGroundingExercise,
+    "getEmotion": getEmotion,
+    "getCrisisResources": getCrisisResources,
+    "logInteraction": logInteraction,
+}
+
 #Agentic AI
 
 def abaWithAgenticAI(userInput, k=3):
