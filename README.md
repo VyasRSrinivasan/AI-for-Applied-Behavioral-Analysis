@@ -40,7 +40,7 @@ The goal is to develop emotionally aware AI tools grounded in *Applied Behaviora
 
 ## Dataset
 A small synthetic ABA-inspired dataset generated using _ChatGPT_ with 100+ rows of:
-- **Antecedent (A)** -> **Behavior (B)** -> Supportive Suggestion (C)
+- **Antecedent (A)** -> **Behavior (B)** -> **Supportive Suggestion (C)**
 - **Emotion_Tag** for lightweight emotion categorization
 
 Usage:
@@ -67,12 +67,12 @@ Pipeline:
 Goal:
 Provides a standard deterministic baseline model for retrieval with NO LLM involvement.
     
-TF-IDF Advantages:
+**Advantages**:
 * Fast and simple
 * Interpretable 
 * Low cost
 
-TF-IDF Disadvantages:
+**Disadvantages**:
 * Unable to recognize context
 * Weak on synonyms and different wordings
 
