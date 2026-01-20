@@ -143,6 +143,25 @@ Reasons to use RAG:
 - **Evaluation**
 - **Ethical Design**
 
+## Directory Structure
+
+.
+├── README.md
+├── abaApp.py
+├── data
+│   ├── abaDatasetV1.csv
+│   └── data_example.json
+├── images
+│   ├── ABAArchitectureDiagramAgenticAI.png
+│   ├── ABAArchitectureDiagramRAG.png
+│   ├── ABAArchitectureDiagramTFIDF.png
+│   ├── ABAProjectLogo.png
+│   └── ABCforABADiagram.png
+├── notebooks
+│   ├── retrievalAugmentedGeneration_aba.ipynb
+│   └── retriever_baseline_aba.ipynb
+├── requirements.txt
+└── src
 
 ## Streamlit App
 
