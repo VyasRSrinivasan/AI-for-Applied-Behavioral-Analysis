@@ -145,6 +145,7 @@ Reasons to use RAG:
 
 ## Directory Structure
 
+```bash
 .
 ├── README.md
 ├── abaApp.py
@@ -163,6 +164,7 @@ Reasons to use RAG:
 ├── requirements.txt
 └── src
 
+```
 ## Streamlit App
 
 Run the app: 
