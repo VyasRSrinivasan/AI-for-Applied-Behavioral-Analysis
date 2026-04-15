@@ -18,3 +18,9 @@ transformers
 #Notebooks
 jupyter
 notebook
+
+# API / Production
+fastapi
+uvicorn[standard]
+python-dotenv
+pytest

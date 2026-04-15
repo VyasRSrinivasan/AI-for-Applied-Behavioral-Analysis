@@ -23,11 +23,13 @@ _Behavior_(**B**): person's response or lack of response to the antecedent.
 
 _Consequence_(**C**): what happens *AFTER* a behavior occurs
 
-## Objective
+## Problem
 Many people with autism and other neurodivergent traits have difficulty understanding subtle emotional or social cues, which results in anxiety, miscommunication, and stress.
 There are many AI chatbots and emotional assistants out there, but only very few incorporate ABA — mostly to diagnose people who might be on the autism spectrum.
 
-The goal is to develop emotionally aware AI tools grounded in *Applied Behavioral Analysis (ABA)* that helps individuals who are neurodivergent to better understand, manage, and respond to social & emotional triggers with clarity and compassion. This would be accomplished by identifying emotional triggers and providing supportive feedback using the ABA model.
+## Objective
+
+The objective is to develop emotionally aware AI tools grounded in *Applied Behavioral Analysis (ABA)* that helps individuals who are neurodivergent to better understand, manage, and respond to social & emotional triggers with clarity and compassion. This would be accomplished by identifying emotional triggers and providing supportive feedback using the ABA model.
 
 ### Why this project?
 - Many people with autism have difficulty reading subtle social cues and emotionally loaded feedback, which can lead to rumination, miscommunication, and difficulty moving on.
